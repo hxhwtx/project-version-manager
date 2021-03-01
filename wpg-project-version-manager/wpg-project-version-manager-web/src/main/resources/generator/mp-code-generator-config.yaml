@@ -1,0 +1,45 @@
+globalConfig:
+  author: weiller
+  open: false
+  idType: UUID
+  dateType: ONLY_DATE
+  enableCache: false
+  activeRecord: false
+  baseResultMap: true
+  baseColumnList: true
+  swagger2: true
+  fileOverride: true
+dataSourceConfig:
+  url: jdbc:mysql://10.10.15.219:3306/waterdb_usercenter_lts?useUnicode=true&useSSL=false&characterEncoding=utf8
+  driverName: com.mysql.jdbc.Driver
+  username: root
+  password: root
+packageConfig:
+  parent: com.wpg
+  moduleName: rest
+  entity: model
+  service: service
+  serviceImpl: service.impl
+  mapper: mapper
+  xml: mapper
+  controller: controller
+  pathInfo:
+    entity_path: src\main\java\com\wpg\rest\model
+    service_path: src\main\java\com\wpg\rest\service
+    service_impl_path: src\main\java\com\wpg\rest\service\impl
+    mapper_path: src\main\java\com\wpg\rest\mapper
+    xml_path: src\main\resources\com\wpg\rest\mapper
+    controller_path: src\main\java\com\wpg\rest\controller
+strategyConfig:
+  naming: underline_to_camel
+  columnNaming: underline_to_camel
+  entityLombokModel: true
+  superMapperClass: com.baomidou.mybatisplus.core.mapper.BaseMapper
+  superServiceClass: com.baomidou.mybatisplus.extension.service.IService
+  superServiceImplClass: com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
+  controllerMappingHyphenStyle: true
+  restControllerStyle: true
+  tablePrefix:
+  include:
+    - user
+    - tenant

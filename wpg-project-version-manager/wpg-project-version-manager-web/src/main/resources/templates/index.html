@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传中心</title>
+    <style type="text/css">
+        table.gridtable {
+            margin-top: 5px;
+            width: 850px;
+            font-family: verdana,arial,sans-serif;
+            font-size:13px;
+            color:#333333;
+            border-width: 1px;
+            border-color: #666666;
+            border-collapse: collapse;
+        }
+        table.gridtable th {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #dedede;
+        }
+        table.gridtable td {
+            text-align: center;
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 850px;text-align: center;margin-top: 10px;margin-bottom: 10px;">
+        <a href="/upload">表单上传</a>&emsp;&emsp;<a href="/jsupload">JS上传</a>
+    </div>
+    <div>
+        <!-- Table goes in the document BODY -->
+        <table class="gridtable" style="display: none">
+            <tr>
+                <th width="200px">文件名</th>
+                <th width="230px">大小</th>
+                <th width="150px">文件/目录</th>
+                <th width="200px">操作</th>
+            </tr>
+
+            <tr th:each="file : ${list}">
+                <td th:text="${file.objectName}">id</td>
+                <td th:text="${file.size}">id</td>
+                <td>
+                    <div th:if="${file.isDir}">目录</div>
+                    <div th:unless="${file.isDir}">文件</div>
+                </td>
+                <td><a target="_blank" th:href="@{/files/view/test/{objectName}(objectName=${file.objectName})}">预览</a> &emsp; <a th:href="@{/files/{objectName}(id=${file.objectName})}">下载</a> &emsp;<a th:href="@{/files/delete/test/{objectName}(objectName=${file.objectName})}">删除</a></td>
+            </tr>
+        </table>
+    </div>
+
+<!--
+1.如果想在路径中加入参数？使用（），在路径的最后加入 @{/files/view(id=${file.id})} ，thymeleaf会在前端渲染成？id=xxx。当多个参数时，以逗号分隔，写成（id=xxx,name=xxx）
+1.效果：/files/view?id=xxx
+
+2.restful形式 @{/files/view/{id}(id=${file.id})}
+2.效果：/files/view/xxx
+ -->
+
+</body>
+</html>

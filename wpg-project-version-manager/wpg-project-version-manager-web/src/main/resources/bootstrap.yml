@@ -1,0 +1,52 @@
+server:
+  port: 10015
+### 升级版的 Mybatis - Plus 打印sql
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+spring:
+  thymeleaf:
+    cache: false
+    check-template-location: true
+    content-type: text/html
+    encoding: UTF-8
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: ${EVN-ACTIVE:dev}
+  application:
+    name: project-version-manager
+  # 配置中心
+  cloud:
+#    sentinel:
+#      transport:
+#        dashboard: localhost:7718
+#      eager: true
+#      datasource:
+#        ds:
+#          nacos:
+#            server-addr: ${NACOS-HOST:10.10.15.218}:${NACOS-PORT:8848}
+#            namespace: dev_lts
+#            rule-type: flow
+#            data-id: sentinel_demo
+#            data-type: json
+    nacos:
+      config:
+        server-addr: ${NACOS-HOST:10.10.15.132}:${NACOS-PORT:8085}
+        file-extension: yml
+        namespace: dev
+        shared-configs: project-version-manager-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+        group: PROJECT_VERSION_MANAGER_DEV
+### 日志文件配置及输出路径
+logging:
+  config: classpath:logback.xml
+  level:
+    root: info
+  path: /home/logs/common/
+###  对应的项目 标志  此处时公共平台的module_common
+wpg:
+  log:
+    app-id: module_common

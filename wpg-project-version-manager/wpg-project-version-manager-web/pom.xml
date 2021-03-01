@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>wpg-project-version-manager</artifactId>
+        <groupId>com.wpg</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.wpg</groupId>
+
+    <artifactId>wpg-project-version-manager-web</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <wpg-cloud.version>1.6-RELEASE</wpg-cloud.version>
+        <wpg-project-version-manager-api.version>1.0-SNAPSHOT</wpg-project-version-manager-api.version>
+    </properties>
+
+    <dependencies>
+        <!--<dependency>
+            <groupId>com.wpg</groupId>
+            <artifactId>wpg-file-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>5.2.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version> 2.2.2.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.4.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>7.1.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.wpg</groupId>
+            <artifactId>wpg-cloud-log</artifactId>
+            <version>${wpg-cloud.version}</version>
+        </dependency>
+        <!--jetcache缓存 -->
+        <!--<dependency>-->
+            <!--<groupId>com.alicp.jetcache</groupId>-->
+            <!--<artifactId>jetcache-starter-redis</artifactId>-->
+            <!--<version>2.5.14</version>-->
+        <!--</dependency>-->
+        <!--引用api-->
+        <dependency>
+            <groupId>com.wpg</groupId>
+            <artifactId>wpg-project-version-api</artifactId>
+            <version>${wpg-project-version-manager-api.version}</version>
+        </dependency>
+        <!--web访问依赖-->
+        <dependency>
+            <groupId>com.wpg</groupId>
+            <artifactId>wpg-cloud-web</artifactId>
+            <version>${wpg-cloud.version}</version>
+        </dependency>
+        <!--mp操作依赖-->
+        <dependency>
+            <groupId>com.wpg</groupId>
+            <artifactId>wpg-cloud-db</artifactId>
+            <version>${wpg-cloud.version}</version>
+        </dependency>
+        <!--公用核心类-->
+        <dependency>
+            <groupId>com.wpg</groupId>
+            <artifactId>wpg-cloud-core</artifactId>
+            <version>${wpg-cloud.version}</version>
+        </dependency>
+        <!--sentinel限流熔断控制-->
+        <dependency>
+            <groupId>com.wpg</groupId>
+            <artifactId>wpg-cloud-sentinel</artifactId>
+            <version>${wpg-cloud.version}</version>
+        </dependency>
+        <!--redis操作控制-->
+        <dependency>
+            <groupId>com.wpg</groupId>
+            <artifactId>wpg-cloud-redis</artifactId>
+            <version>${wpg-cloud.version}</version>
+        </dependency>
+        <!--调用其他服务feign-->
+        <dependency>
+            <groupId>com.wpg</groupId>
+            <artifactId>wpg-usercenter-service-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>mybatis-plus-annotation</artifactId>
+                    <groupId>com.baomidou</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>wpg-tools-log</artifactId>
+                    <groupId>com.wpg</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>wpg-tools-starter-redis</artifactId>
+                    <groupId>com.wpg</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- mybatis-plus generator 自动生成代码插件 -->
+            <plugin>
+                <groupId>com.weiller</groupId>
+                <artifactId>mybatis-plus-generator-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <configuration>
+                    <configurationFile>${basedir}/src/main/resources/generator/mp-code-generator-config.yaml</configurationFile>
+                </configuration>
+
+            </plugin>
+            <!-- mybatis-plus generator 自动生成代码插件 -->
+        </plugins>
+    </build>
+</project>
